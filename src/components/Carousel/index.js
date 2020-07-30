@@ -1,7 +1,7 @@
 import React from 'react';
 import { VideoCardGroupContainer, Title, ExtraLink } from './styles';
 import VideoCard from './components/VideoCard';
-import Slider, { SliderItem } from './components/Slider'
+import Slider, { SliderItem, Container } from './components/Slider'
 
 function Carrosel({
   ignoreFirstVideo,
@@ -25,23 +25,25 @@ function Carrosel({
           }
         </>
       )}
-      <Slider>
-        {videos.map((video, index) => {
-          if (ignoreFirstVideo && index === 0) {
-            return null;
-          }
+      <Container>
+        <Slider>
+          {videos.map((video, index) => {
+            if (ignoreFirstVideo && index === 0) {
+              return null;
+            }
 
-          return (
-            <SliderItem key={video.titulo}>
-              <VideoCard
-                videoTitle={video.titulo}
-                videoURL={video.url}
-                categoryColor={categoryColor}
-              />
-            </SliderItem>
-          );
-        })}
-      </Slider>
+            return (
+              <SliderItem key={video.titulo}>
+                <VideoCard
+                  videoTitle={video.titulo}
+                  videoURL={video.url}
+                  categoryColor={categoryColor}
+                />
+              </SliderItem>
+            );
+          })}
+        </Slider>
+      </Container>
     </VideoCardGroupContainer>
   );
 }
