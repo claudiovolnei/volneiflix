@@ -68,7 +68,7 @@ const Input = styled.input`
 `;
 
 function FormField({
-  type, name, value, onChange, label,
+  type, name, value, onChange, label, suggestions,
 }) {
   const fieldId = `id_${name}`;
   const isTextarea = type === 'textarea';
@@ -88,12 +88,22 @@ function FormField({
           value={value}
           name={name}
           hasValue={hasValue}
+          autoComplete="off"
           onChange={onChange}
+          list={`suggestionFor_${fieldId}`}
         />
         <Label.Text>
           {label}
         </Label.Text>
       </Label>
+      <datalist id={`suggestionFor_${fieldId}`}>
+        { suggestions.map((suggestion) => (
+          <option value={suggestion}>
+            {suggestion}
+          </option>
+
+        ))}
+      </datalist>
     </FormFieldWarpper>
   );
 }
@@ -102,6 +112,10 @@ FormField.defaultProps = {
   type: 'text',
   value: '',
   onChange: () => {},
+  suggestions: [
+    'Front End',
+    'Back End'
+  ],
 };
 
 FormField.PorpTypes = {
@@ -110,6 +124,7 @@ FormField.PorpTypes = {
   name: PorpTypes.string.isRequired,
   value: PorpTypes.string,
   onChange: PorpTypes.func,
+  suggestions: PorpTypes.arrayOf(PorpTypes.string),
 };
 
 export default FormField;
