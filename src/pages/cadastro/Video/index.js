@@ -16,6 +16,7 @@ function CadastroVideo() {
 
     const history = useHistory();
     const [categorias, setCategorias] = useState([]);
+    const categoryTitles = categorias.map(({titulo}) => titulo);
 
     useEffect(() => {
         categoriasRepository
@@ -27,7 +28,7 @@ function CadastroVideo() {
             });
     }, []);
 
-    console.log(categorias);
+
     return (
         <PageDefault>
             <h1>Cadastro de Video</h1>
@@ -74,6 +75,7 @@ function CadastroVideo() {
                     value={ values.categoria }
                     onChange={ handleChange }
                     name="categoria"
+                    suggestions={ categoryTitles }
                 />
             <Button type="submit"> 
                 Cadastrar
